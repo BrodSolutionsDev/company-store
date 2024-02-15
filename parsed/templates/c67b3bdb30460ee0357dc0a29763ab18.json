@@ -1,0 +1,1 @@
+{"components/custom/info-icons/easy-to-use":"<div class=\"info-icon\">\n  <div class=\"info-icon__img\">\n    <img src=\"{{cdn 'img/info-icons/easy-to-use.png'}}\" alt=\"easy to use icon\">\n  </div>\n  <p>{{value}}</p>\n</div>\n"}

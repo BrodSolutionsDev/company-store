@@ -1,0 +1,13 @@
+<div id="home-featured">
+    <div class="flex-row-heading">
+        <h2>Featured Products</h2>
+        <a href="/products/?sort=featured">Show All ></a>
+      </div>
+<ul class="scc-slider" data-product-type="featured" {{#if settings.data_tag_enabled}} data-list-name="Featured Products" {{/if}}>
+    {{#each products}}
+        <li class="product scc-slide">
+                {{>components/products/card settings=../settings theme_settings=../theme_settings customer=../customer event="list" position=(add @index 1)}}
+        </li>
+    {{/each}}
+</ul>
+</div>

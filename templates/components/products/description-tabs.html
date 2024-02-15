@@ -1,0 +1,75 @@
+<ul class="tabs" data-tab>
+    {{#if product.description}}
+        <li class="tab is-active">
+            <a class="tab-title" href="#tab-description">{{lang 'products.description'}}</a>
+        </li>
+        {{/if}}
+        {{#if product.warranty}}
+        <li class="tab {{#unless product.description}}is-active{{/unless}}">
+            <a class="tab-title" href="#tab-warranty">{{lang 'products.warranty'}}</a>
+        </li>
+        {{/if}}
+        {{#all product.custom_fields theme_settings.show_custom_fields_tabs}}
+        <li class="tab">
+            <a class="tab-title"
+            href="#tab-{{dashcase (lowercase (sanitize theme_settings.pdp-custom-fields-tab-label))}}"
+            >
+            {{sanitize theme_settings.pdp-custom-fields-tab-label}}
+        </a>
+    </li>
+    {{/all}}
+    {{#all settings.show_product_reviews theme_settings.show_product_reviews product.reviews.total}}
+    <li class="tab">
+        <a class="tab-title productView-reviewTabLink" href="#tab-reviews">{{lang 'products.reviews.header' total=product.reviews.total}}</a>
+    </li>
+    {{/all}}
+</ul>
+<div class="tabs-contents">
+    {{#if product.description}}
+    <div class="tab-content is-active" id="tab-description">
+        {{{product.description}}}
+    </div>
+    <button class="scc-button" id="description-show-more">Show More</button>
+    {{/if}}
+    {{#if product.warranty}}
+        <div class="tab-content is-active" id="tab-warranty">
+            <h4>Additional Product Information</h4>
+            {{{product.warranty}}}
+        </div>
+    {{/if}}
+    {{#all product.custom_fields theme_settings.show_custom_fields_tabs}}
+      <div class="tab-content" id="tab-{{dashcase (lowercase (sanitize theme_settings.pdp-custom-fields-tab-label))}}">
+         <dl class="productView-info">
+            {{> components/products/custom-fields }}
+         </dl>
+      </div>
+    {{/all}}
+</div>
+
+<script>
+    const desc = document.getElementById("tab-description");
+    const descShowMore = document.getElementById("description-show-more");
+    if (desc.getBoundingClientRect().height <= 200) {
+        descShowMore.style.display = "none";
+    }
+
+    if (desc.getBoundingClientRect().height > 200) {
+        desc.style.height = "200px";
+        desc.style.overflow = "hidden";
+        desc.classList.add("showMoreBlur")
+    }
+    
+    descShowMore.addEventListener("click", function() {
+        if (desc.getBoundingClientRect().height > 200) {
+            desc.style.height = "200px";
+            desc.style.overflow = "hidden";
+            descShowMore.innerText = "Show More"
+            desc.classList.add("showMoreBlur");
+        } else {
+            desc.style.height = "auto";
+            desc.style.overflow = "visible"
+            descShowMore.innerText = "Show Less"
+            desc.classList.remove("showMoreBlur");
+        }
+    });
+</script>

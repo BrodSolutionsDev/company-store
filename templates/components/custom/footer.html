@@ -1,0 +1,96 @@
+<footer class="scc-footer">
+
+  <div class="flex-row-heading scc-footer-contact-copyright">
+    <p>&copy; {{moment format="YYYY"}} {{settings.store_name}} All Rights Reserved.</p>
+    <p>Have questions? <a class="scc-button-action" href="https://brodsolutions.com/contact/">Contact us!</a></p>
+  </div>
+  <div class="flex-row snackbar">
+    <!-- Default:  Icon Shop All -->
+    {{#if page_type '===' 'default'}}
+    <a class="scc-button glow-on-hover" href="/shop-all">
+      <svg class="scc-button-icon"><use href="#icon-cart"></use></svg>
+      Shop Now!</a
+    >
+    {{/if}}
+
+    {{#if page_type '===' 'cart'}}
+                    <div class="cart-actions cart-content-padding-right">
+                        <a
+                            class="scc-button"
+                            href="{{urls.checkout.single_address}}"
+                            title="{{lang 'cart.checkout.title'}}"
+                            data-primary-checkout-now-action
+                        >
+                        <svg class="scc-button-icon"><use href="#icon-lock"></use></svg>
+                        Checkout
+                        </a>
+                    </div>
+    {{/if}}
+
+    <!-- Page:  Shop By Category -->
+    <!-- {{#if page_type '===' 'page'}}
+      {{#if page.title '===' 'Countertop Epoxy' }}
+      <a id="scc-button-page" class="scc-button" href="/products/countertops">
+        <svg class="scc-button-icon"><use href="#icon-cart"></use></svg>
+        Shop {{ page.title }}
+      </a>
+      {{/if}} {{#if page.title '===' 'Flooring' }}
+      <a id="scc-button-page" class="scc-button" href="/shop/flooring">
+        <svg class="scc-button-icon"><use href="#icon-cart"></use></svg>
+        Shop {{ page.title }}
+      </a>
+      {{/if}} 
+    {{/if}} -->
+
+    <!-- Category:  Filters -->
+    {{#if page_type '===' 'category'}}
+    <!-- <a class="scc-button" href="#">
+      <svg class="scc-button-icon"><use href="#icon-search"></use></svg>
+      Filter & Sort</a
+    > -->
+    {{/if}}
+
+    <!-- Product: Add to Cart -->
+    {{#if page_type '===' 'product'}}
+    <div id="scc-snackbar-addtocart">
+      <form class="form" method="post" action="{{product.cart_url}}" enctype="multipart/form-data" data-cart-item-add>
+        <input type="hidden" name="action" value="add" />
+        <input type="hidden" name="product_id" value="{{product.id}}" />
+        <div data-product-option-change>
+            {{inject 'showSwatchNames' theme_settings.show_product_swatch_names}} {{#each product.options}} {{#if partial '==' 'set-select'}} {{{dynamicComponent 'components/products/options'}}} {{/if}} {{/each}}
+        </div>
+        <div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">
+          <label class="form-label form-label--alternate">
+            {{lang 'products.current_stock'}}
+            <span data-product-stock>{{product.stock_level}}</span>
+          </label>
+        </div>
+        {{> components/products/add-to-cart}} {{#if product.out_of_stock}} {{#if product.out_of_stock_message}} {{> components/common/alert/alert-error
+        product.out_of_stock_message}} {{else}} {{> components/common/alert/alert-error (lang 'products.sold_out')}} {{/if}} {{/if}}
+      </form>
+      
+    </div>
+
+    {{/if}}
+  </div>
+</footer>
+
+<script>
+  const footer = document.querySelector(".scc-footer");
+  const snackbar = document.querySelector(".snackbar");
+
+  footer.style.bottom = `${snackbar.getBoundingClientRect().height - 7}px`;
+
+  if ("{{page_type}}" === "product") {
+    const incBtn = document.querySelector(".snackbar [data-action='inc']");
+    const decBtn = document.querySelector(".snackbar [data-action='dec']");
+
+    incBtn.addEventListener("click", function() {
+        incBtn.previousElementSibling.value = Number(incBtn.previousElementSibling.value) + 1;
+    });
+
+    decBtn.addEventListener("click", function() {
+        decBtn.nextElementSibling.value = Number(decBtn.nextElementSibling.value) - 1;
+    });
+  }
+</script>

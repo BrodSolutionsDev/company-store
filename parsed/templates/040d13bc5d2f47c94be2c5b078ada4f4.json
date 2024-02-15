@@ -1,0 +1,1 @@
+{"components/custom/info-icons/eco-friendly":"<div class=\"info-icon\">\n  <div class=\"info-icon__img\">\n    <img src=\"{{cdn 'img/info-icons/eco-friendly.png'}}\" alt=\"eco friendly icon\">\n  </div>\n  <p>{{value}}</p>\n</div>\n"}

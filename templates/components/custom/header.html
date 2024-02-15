@@ -1,0 +1,114 @@
+<a href="#main-content" class="skip-to-main-link">{{lang 'header.skip_to_main'}}</a>
+
+<header class="header">
+    <div class="header-container">
+        <!-- menu button and search button -->
+        <div class="buttons">
+            <button class="mobileMenu-toggle" title="main menu navigation" aria-label="main menu navigation">
+                <span class="toggle-bar"></span>
+                <span class="toggle-bar"></span>
+                <span class="toggle-bar"></span>
+            </button>
+            <button class="navUser-action navUser-action--quickSearch"
+               type="button"
+               id="quick-search-expand"
+               data-search="quickSearch"
+               aria-controls="quickSearch"
+               aria-label="{{lang 'common.search'}}"
+               title="{{lang 'common.search'}} our store"
+            >
+            <svg class="icon">
+                <use xlink:href="#icon-search" />
+            </svg>
+            </button>
+        </div>
+        <!-- store logo -->
+        <div class="menu-logo">
+            {{> components/common/store-logo}}
+        </div>
+        <!-- account button and cart button -->
+        <div class="buttons">
+            <a class="navUser-action"
+                   href="{{urls.account.index}}"
+                   aria-label="My Account"
+                   title="{{lang 'common.account'}}"
+                ><button class="account-toggle header-button-alt">
+                <svg class="icon">
+                    <use xlink:href="#icon-user" />
+                </svg>
+            </button>
+            </a>
+            <a class="cart-toggle header-button-alt"
+            data-cart-preview
+            data-dropdown="cart-preview-dropdown"
+            href="{{urls.cart}}"
+            aria-label="{{lang 'cart.nav_aria_label'}}"
+            title="{{lang 'cart.nav_aria_label'}}"
+            >
+                <span id="cart-button-qty" class="countPill cart-quantity"></span>
+                <svg class="icon">
+                    <use xlink:href="#icon-cart" />
+                </svg>
+            </a>
+
+        </div>
+    </div>
+</header>
+
+
+{{{region name="header_bottom--global"}}}
+
+{{{region name="header_bottom"}}}
+
+<div id="mobile-menu" style="display: none">
+    {{> components/custom/menu }}
+</div>
+<div class="dropdown dropdown--quickSearch" id="quickSearch" aria-hidden="true" data-prevent-quick-search-close>
+    {{> components/common/quick-search name='nav-quick-search'}}
+</div>
+<div class="dropdown-menu" id="cart-preview-dropdown" data-dropdown-content aria-hidden="true" style=""></div>
+
+<script>
+    window.onload = function() {
+        const menuBtn = document.querySelector(".mobileMenu-toggle");
+        const close = document.getElementById("close-mobile-menu");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const body = document.querySelector("body");
+    
+        menuBtn.addEventListener("click", function(e) {
+            if (mobileMenu.style.display == "none") {
+                mobileMenu.style.display = "block";
+                mobileMenu.style.height = `${window.innerHeight}px`;
+                body.style.overflow = "hidden";
+            } else {
+                mobileMenu.style.display = "none";
+                body.style.overflow = "auto";
+            }
+        });
+    
+        close.addEventListener("click", function() {
+            mobileMenu.style.display = "none";
+            body.style.overflow = "auto";
+        })
+        
+        
+    } 
+
+    const previewCart = document.getElementById("cart-preview-dropdown");
+    const previewCartOptions = {
+        attributes: true,
+    }
+
+    function callback(mutationList, observer) {
+        mutationList.forEach((mutation) => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                if (!previewCart.classList.contains("is-open")) {
+                    previewCart.style.display = "none";
+                }
+            }
+        })
+    }
+
+    const observer = new MutationObserver(callback);
+    observer.observe(previewCart, previewCartOptions);
+</script>

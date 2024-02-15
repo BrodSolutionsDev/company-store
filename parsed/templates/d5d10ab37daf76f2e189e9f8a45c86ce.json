@@ -1,0 +1,1 @@
+{"components/custom/categories-simple":"<div class=\"section scc-categories-simple\">\r\n  <h2>Shop By Category</h2>\r\n  <div class=\"scc-slider-six\">\r\n    {{#each categories}}\r\n    <a class=\"scc-pills\" href=\"{{url}}\" title=\"{{name}} product category\">{{name}}</a>\r\n    {{/each}}\r\n  </div>\r\n</div>\r\n"}

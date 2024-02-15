@@ -1,0 +1,75 @@
+body {
+  padding-top: 0;
+  background-color: $bg-soft;
+  overflow-x: hidden;
+}
+
+.body {
+  margin-top: 0px;
+  background: $bg-soft;
+  margin-bottom: 150px;
+  // on first .section reduce padding
+  .section:first-child {
+    padding-top:0;
+  }
+  .container {
+    z-index: 2;
+    background: $bg-soft;
+    border-top-left-radius: $border-radius-sm !important;
+    border-top-right-radius: $border-radius-sm !important;
+    //padding: 0 5%;
+  }
+}
+
+
+.container-lg, .container {
+  @include mobile-container;
+  max-width: $max-width;
+  padding: 0;
+
+  @media only screen and (max-width:1280px) {
+      max-width: calc(100% - 40px) !important;
+      margin: 0 auto;
+      .breadcrumbs {
+        display: block;
+      }
+  }
+}
+.container-overflow-none {
+  overflow: hidden;
+}
+
+.section {
+  padding-top: $padding-medium;
+  padding-bottom: $padding-medium;
+  max-width: $max-width;
+  margin: 0 auto;
+  z-index: 1;
+  position: relative;
+  // on mobile reduce padding
+  @include mobile-container {
+    padding-top: $padding-small;
+    padding-bottom: $padding-small;
+  }
+}
+
+.page-content {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.button--primary {
+  @include flex-center;
+  gap: 10px;
+  .icon  {
+    fill: $white;
+  }
+}
+
+a {
+  // text-decoration: none;
+  font-weight: 500;
+  &:hover {
+    text-decoration: none;
+  }
+}

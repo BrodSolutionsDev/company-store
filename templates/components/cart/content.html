@@ -1,0 +1,36 @@
+<table class="cart" data-cart-quantity="{{cart.quantity}}">
+    <!-- <thead class="cart-header">
+        <tr>
+            <th class="cart-header-item" colspan="2">{{lang 'cart.checkout.item'}}</th>
+            <th class="cart-header-item">{{lang 'cart.checkout.price'}}</th>
+            <th class="cart-header-item cart-header-quantity">{{lang 'cart.checkout.quantity'}}</th>
+            <th class="cart-header-item">{{lang 'cart.checkout.total'}}</th>
+        </tr>
+    </thead> -->
+    <tbody class="cart-list">
+        {{#each cart.items}}
+            {{> components/custom/product/product-card-cart id=this.id cart=cart name=this.name }}
+        {{/each}}
+    </tbody>
+</table>
+
+<script>
+    const deleteBtns = document.querySelectorAll(".product-card-delete");
+    deleteBtns.forEach(btn => {
+        btn.style.height = Math.round(btn.parentNode.clientHeight) + "px";
+        btn.addEventListener("click", function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            let target;
+            if (e.target.parentNode.parentNode == document.querySelector(".product-card-delete")) {
+                target = e.target.parentNode.parentNode.parentNode
+                console.log("moving from svg")
+            } else {
+                target = e.target.parentNode.parentNode
+            }
+            // if (e.target == document.querySelector(".icon")) {
+            console.log(target.children[0].lastElementChild)         
+            // }
+        })
+    })
+</script>
