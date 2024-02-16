@@ -1,6 +1,118 @@
 {{inject 'outOfStockDefaultMessage' (lang 'products.out_of_stock_default_message')}}
 
-<div class="productView" {{#if settings.data_tag_enabled}} data-event-type="product" data-entity-id="{{product.id}}"
+<div class="digital-productView" {{#if settings.data_tag_enabled}} data-event-type="product" data-entity-id="{{product.id}}"
+    data-name="{{product.title}}" data-product-category="
+    {{#each product.category}}
+        {{#if @last}}{{this}}{{else}}{{this}}, {{/if}}
+    {{/each}}" data-product-brand="{{product.brand.name}}" data-product-price="
+    {{#or customer (unless settings.hide_price_from_guests)}}
+        {{#if product.price.with_tax}}
+            {{product.price.with_tax.value}}
+        {{else}}
+            {{product.price.without_tax.value}}
+        {{/if}}
+    {{else}}
+        {{lang 'common.login_for_pricing'}}
+    {{/or}}" data-product-variant="single-product-option" {{/if}}>
+    <section class="digital-productView-details">
+        <h1 class="digital-productView-title">{{product.title}}</h1>
+        {{#if product.meta_description}}
+            <p class="digital-productView-metaDescription">{{product.meta_description}}</p>
+        {{/if}}
+        {{#if product.availability}}
+            <h2 class="digital-productView-subTitle">{{product.availability}}</h2>
+        {{/if}}
+        <div class="digital-productView-options">
+            {{#if product.release_date }}
+            <p>{{product.release_date}}</p>
+            {{/if}}
+            <form class="form" method="post" action="{{product.cart_url}}" enctype="multipart/form-data"
+                data-cart-item-add>
+                <input type="hidden" name="action" value="add">
+                <input type="hidden" name="product_id" value="{{product.id}}" />
+                <div data-product-option-change>
+                    {{inject 'showSwatchNames' theme_settings.show_product_swatch_names}}
+                    {{#each product.options}}
+                    {{{dynamicComponent 'components/products/options'}}}
+                    {{/each}}
+                </div>
+                <div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">
+                    <label class="form-label form-label--alternate">
+                        {{lang 'products.current_stock'}}
+                        <span data-product-stock>{{product.stock_level}}</span>
+                    </label>
+                </div>
+                {{> components/custom/product/add-to-cart price=product.price with_wallet_buttons=true}}
+                {{#if product.out_of_stock}}
+                {{#if product.out_of_stock_message}}
+                {{> components/common/alert/alert-error product.out_of_stock_message}}
+                {{else}}
+                {{> components/common/alert/alert-error (lang 'products.sold_out')}}
+                {{/if}}
+                {{/if}}
+            </form>
+            {{#if settings.show_wishlist}}
+            {{> components/common/wishlist-dropdown}}
+            {{/if}}
+        </div>
+    </section>
+
+    <section class="digital-productView-images">
+        {{#if product.images.length '>' 1 }}
+        {{> components/carousel-content-announcement}}
+        {{/if}}
+        <figure class="productView-image" data-image-gallery-main {{#if product.main_image}}
+            data-zoom-image="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size }}"
+            {{/if}}>
+            <div class="productView-img-container">
+                {{!-- Remove the surrounding a-element if there is no main image. --}}
+                {{#if product.main_image}}
+                <a href="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size}}"
+                    target="_blank">
+                    {{/if}}
+                    {{> components/common/responsive-img
+                    image=product.main_image
+                    class="productView-image--default"
+                    fallback_size=theme_settings.product_size
+                    lazyload=theme_settings.lazyload_mode
+                    default_image=theme_settings.default_image_product
+                    otherAttributes="data-main-image"
+                    }}
+                    {{!-- Remove the surrounding a-element if there is no main image. --}}
+                    {{#if product.main_image}}
+                </a>
+                {{/if}}
+            </div>
+        </figure>
+        <ul class="productView-thumbnails" {{#gt product.images.length 5}} data-slick='{
+                "infinite": false,
+                "mobileFirst": true,
+                "dots": false,
+                "accessibility": false,
+                "slidesToShow": 5,
+                "slidesToScroll": 5
+            }' {{/gt}}>
+            {{#each product.images}}
+            <li class="productView-thumbnail">
+                <a class="productView-thumbnail-link"
+                    href="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+                    data-image-gallery-item
+                    data-image-gallery-new-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.product_size}}"
+                    data-image-gallery-new-image-srcset="{{getImageSrcset this use_default_sizes=true}}"
+                    data-image-gallery-zoom-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}">
+                    {{> components/common/responsive-img
+                    image=this
+                    fallback_size=../theme_settings.productview_thumb_size
+                    lazyload=../theme_settings.lazyload_mode
+                    }}
+                </a>
+            </li>
+            {{/each}}
+        </ul>
+    </section>
+</div>
+
+<!-- <div class="productView" {{#if settings.data_tag_enabled}} data-event-type="product" data-entity-id="{{product.id}}"
     data-name="{{product.title}}" data-product-category="
     {{#each product.category}}
         {{#if @last}}{{this}}{{else}}{{this}}, {{/if}}
@@ -160,4 +272,4 @@
             span.style.display = "none";
         }
     });
-</script>
+</script> -->

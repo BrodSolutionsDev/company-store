@@ -1,0 +1,16 @@
+.digital-productView {
+  display: flex;
+  gap: 20px;
+
+  .digital-productView-details {
+    width: 30%;
+  }
+
+  .digital-productView-images {
+    width: 70%;
+
+    .productView-thumbnails {
+      margin: 0 auto;
+    }
+  }
+}
