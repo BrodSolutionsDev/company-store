@@ -4,6 +4,7 @@
 
   .digital-productView-details {
     width: 30%;
+    height: fit-content;
   }
 
   .digital-productView-images {
@@ -11,6 +12,11 @@
 
     .productView-thumbnails {
       margin: 0 auto;
+
+      img {
+        width: 100%;
+        // max-height: 600px;
+      }
     }
   }
 }
