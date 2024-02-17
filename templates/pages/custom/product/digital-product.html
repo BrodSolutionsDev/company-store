@@ -22,6 +22,31 @@ product:
     <div>
         {{> components/custom/product/digital-product-view}}
 
+        <div class="digital-productFeatures">
+            <div class="digital-product-sidebar">
+                <h2>Info</h2>
+                {{#each product.custom_fields}}
+                    <div class="digital-product-infoField">
+                        <h3>{{name}}</h3>
+                        <p>{{value}}</p>
+                    </div>
+                {{/each}}
+                <div class="digital-product-infoField">
+                    <h3>Legal Info</h3>
+                    <p>By purchasing this product, you give Brod Solutions permission to access your account within the Terms of Service.</p>
+                </div>
+
+                <div class="digital-product-infoField">
+                    <h3>Categories</h3>
+                    <ul class="digital-product-categoryList">
+                        {{#each product.category}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         {{{region name="product_below_content"}}}
 
         {{#if product.videos.list.length}}

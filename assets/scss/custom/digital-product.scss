@@ -16,7 +16,43 @@
 
       img {
         width: 100%;
-        // max-height: 600px;
+      }
+    }
+  }
+}
+
+.digital-productFeatures {
+  display: flex;
+  flex-direction: row;
+
+  .digital-product-sidebar {
+    max-width: 200px;
+
+    .digital-product-infoField {
+      h3 {
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+
+      p {
+        margin-bottom: 20px;
+      }
+
+      .digital-product-categoryList {
+        display: flex;
+        gap: 10px;
+        list-style: none;
+        flex-wrap: wrap;
+        margin: 0;
+
+        li {
+          width: fit-content;
+          background: #f0f0f0;
+          display: flex;
+          padding: 8px;
+          border-radius: 5px;
+          font-size: 14px;
+        }
       }
     }
   }
