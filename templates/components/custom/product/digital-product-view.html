@@ -1,6 +1,6 @@
 {{inject 'outOfStockDefaultMessage' (lang 'products.out_of_stock_default_message')}}
 
-<div class="digital-productView" {{#if settings.data_tag_enabled}} data-event-type="product" data-entity-id="{{product.id}}"
+<div class="productView digital-productView" {{#if settings.data_tag_enabled}} data-event-type="product" data-entity-id="{{product.id}}"
     data-name="{{product.title}}" data-product-category="
     {{#each product.category}}
         {{#if @last}}{{this}}{{else}}{{this}}, {{/if}}
@@ -30,7 +30,7 @@
                 data-cart-item-add>
                 <input type="hidden" name="action" value="add">
                 <input type="hidden" name="product_id" value="{{product.id}}" />
-                <div data-product-option-change>
+                <div data-product-option-change style="display: none;">
                     {{inject 'showSwatchNames' theme_settings.show_product_swatch_names}}
                     {{#each product.options}}
                     {{{dynamicComponent 'components/products/options'}}}
