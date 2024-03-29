@@ -280,3 +280,12 @@
     display: none;
   }
 }
+
+.nav-list_subCategories {
+    list-style: none;
+    margin-bottom: 0;
+
+    li {
+        margin-top: 10px;
+    }
+}

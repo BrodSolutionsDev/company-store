@@ -6,7 +6,18 @@
     <h3>Shop Products</h3>
     <div class="nav-list">
     {{#each categories}}
+      <div class="nav-list_item">
       <a href="{{url}}">{{name}}</a>
+      {{#if children}}
+        <ul class=nav-list_subCategories>
+        {{#each children}}
+            <li>
+                <a href="{{url}}">{{name}}</a>
+            </li>
+        {{/each}}
+        </ul>
+      {{/if}}
+      </div>
     {{/each}}
     </div>
   </div>
