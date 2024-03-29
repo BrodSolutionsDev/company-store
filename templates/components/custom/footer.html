@@ -75,6 +75,7 @@
 </footer>
 
 <script>
+  (function() {
   const footer = document.querySelector(".scc-footer");
   const snackbar = document.querySelector(".snackbar");
 
@@ -85,6 +86,7 @@
       const incBtn = document.querySelector(".snackbar [data-action='inc']");
       const decBtn = document.querySelector(".snackbar [data-action='dec']");
 
+        if (!incBtn) return;
       incBtn.addEventListener("click", function() {
         incBtn.previousElementSibling.value = Number(incBtn.previousElementSibling.value) + 1;
       });
@@ -94,4 +96,5 @@
       });
     }
   }
+  })();
 </script>
