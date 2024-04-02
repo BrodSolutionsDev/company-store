@@ -466,3 +466,83 @@ $desktop-image-container-height: 580px;
     }
   }
 }
+
+.nunaProductView {
+    display: flex;
+    flex-direction: row;
+
+    &-images {
+        width: 65%;
+        display: flex;
+        flex-direction: row-reverse;
+        background: unset !important;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &-details {
+        width: 35%;
+
+        section {
+            width: 100%;
+        }
+    }
+
+    &-title {
+        font-size: 48px;
+        text-align: center;
+    }
+
+    &-brand {
+        text-align: center;
+        margin-bottom: 0;
+    }
+
+    &-price {
+        font-size: 16px;
+        justify-content: center;
+    }
+
+    &-thumbnails {
+        width: fit-content !important;
+        margin: unset !important;
+
+        .slick-prev {
+            left: 50%;
+            transform: translateX(-50%) rotate(90deg) !important;
+            top: -50px !important;
+            position: absolute;
+        }
+
+        .slick-next {
+            right: 50%;
+            transform: translateX(50%) rotate(90deg) !important;
+            bottom: 0;
+        }
+
+        .productView-thumbnail {
+            width: fit-content !important;
+        }
+
+        .slick-list {
+            background: unset !important;
+        }
+
+        .slick-track {
+            flex-direction: column;
+            background: unset !important;
+
+            .slick-slide {
+                height: fit-content !important;
+            }
+        }
+    }
+    
+    .customAvailabilityText {
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
+        padding: 8px 0;
+        text-align: center;
+        margin: 15px 0 !important;
+    }
+}

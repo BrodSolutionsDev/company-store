@@ -25,12 +25,6 @@ category:
             lazyload=theme_settings.lazyload_mode
             class="category-header-image"
         }}
-        <div class="category-text-overlay">
-            {{#unless theme_settings.hide_category_page_heading }}
-            <h1 class="page-heading">{{category.name}}</h1>
-            {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
-        {{/unless}}
-    </div>
         {{else}}
             {{#unless theme_settings.hide_category_page_heading }}
             <h1 class="page-heading">{{category.name}}</h1>
@@ -39,6 +33,12 @@ category:
     {{/if}}
     </div>
     
+        <div class="category-text-overlay">
+            {{#unless theme_settings.hide_category_page_heading }}
+            <h1 class="page-heading">{{category.name}}</h1>
+            {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+        {{/unless}}
+    </div>
 </div>
 <div class="category-description">
     {{{category.description}}}
