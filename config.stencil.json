@@ -3,7 +3,10 @@
     "brand": {},
     "category": {},
     "page": {},
-    "product": {"digital-product.html": "/big-commerce-add-ons/bigcommerce-theme-node-sass-sunset-1-31-2024/"}
+    "product": {
+      "digital-product.html": "/big-commerce-add-ons/bigcommerce-theme-node-sass-sunset-1-31-2024/",
+      "nuna-product.html": "/bigcommerce-solutions/custom-project-builder/"
+    }
   },
   "normalStoreUrl": "https://store.brodsolutions.com/",
   "port": 3000

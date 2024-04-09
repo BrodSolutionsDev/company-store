@@ -1,0 +1,22 @@
+<section class="toggle videoGallery" data-video-gallery>
+    <h2>HERO</h2>
+    <div class="videos-list">
+        {{#each videos.list limit=1}}
+        <div class="videos-list__video">
+            <iframe
+                id="player"
+                class="lazyload"
+                type="text/html"
+                width="640"
+                height="390"
+                frameborder="0"
+                webkitallowfullscreen
+                mozallowfullscreen
+                allowfullscreen
+                data-src="//www.youtube.com/embed/{{this.id}}"
+                data-video-player>
+            </iframe>
+        </div>
+        {{/each}}
+    </div>
+</section>
